@@ -1,0 +1,100 @@
+@Entity
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String username;
+    private String password;
+    private Role role;
+    private String name;
+    private String email;
+    private String phone;
+    // getters and setters
+}
+
+@Entity
+public class StudentProfile {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    private String photo;
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+    private String year;
+    // getters and setters
+}
+
+@Entity
+public class FacultyProfile {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    private String photo;
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+    private String officeHours;
+    // getters and setters
+}
+
+@Entity
+public class AdministratorProfile {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    private String photo;
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+    // getters and setters
+}
+
+@Entity
+public class Course {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String title;
+    private String description;
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+    @ManyToOne
+    @JoinColumn(name = "faculty_id")
+    private FacultyProfile faculty;
+    // getters and setters
+}
+
+@Entity
+public class Enrollment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private StudentProfile student;
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
+    // getters and setters
+}
+
+@Entity
+public class Department {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private String description;
+    // getters and setters
+}
