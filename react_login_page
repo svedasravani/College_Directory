@@ -1,0 +1,61 @@
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
+const LoginPage = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('');
+  const history = useHistory();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Call API endpoint to authenticate user
+    fetch('/api/authenticate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password, role }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          // Redirect user to their respective dashboard
+          history.push(`/${role.toLowerCase()}`);
+        } else {
+          // Display error message
+          alert('Invalid credentials');
+        }
+      })
+      .catch((error) => console.error(error));
+  };
+
+  return (
+    <div>
+      <h1>Login Page</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Username:
+          <input type="text" value={username} onChange={(event) => setUsername(event.target.value)} />
+        </label>
+        <br />
+        <label>
+          Password:
+          <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} />
+        </label>
+        <br />
+        <label>
+          Role:
+          <select value={role} onChange={(event) => setRole(event.target.value)}>
+            <option value="">Select a role</option>
+            <option value="student">Student</option>
+            <option value="faculty">Faculty</option>
+            <option value="administrator">Administrator</option>
+          </select>
+        </label>
+        <br />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
+};
+
+export default LoginPage;
