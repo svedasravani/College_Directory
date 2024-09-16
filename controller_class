@@ -1,0 +1,83 @@
+@RestController
+@RequestMapping("/api")
+public class AuthenticationController {
+    @Autowired
+    private UserService userService;
+    
+    @PostMapping("/authenticate")
+    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
+        // call service method to authenticate user
+    }
+}
+
+@RestController
+@RequestMapping("/api/student")
+public class StudentController {
+    @Autowired
+    private StudentProfileService studentProfileService;
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<StudentProfile> getStudentProfile(@PathVariable Long id) {
+        // call service method to fetch student profile
+    }
+}
+
+@RestController
+@RequestMapping("/api/faculty")
+public class FacultyController {
+    @Autowired
+    private FacultyProfileService facultyProfileService;
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<FacultyProfile> getFacultyProfile(@PathVariable Long id) {
+        // call service method to fetch faculty profile
+    }
+}
+
+@RestController
+@RequestMapping("/api/administrator")
+public class AdministratorController {
+    @Autowired
+    private AdministratorProfileService administratorProfileService;
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<AdministratorProfile> getAdministratorProfile(@PathVariable Long id) {
+        // call service method to fetch administrator profile
+    }
+}
+
+@RestController
+@RequestMapping("/api/course")
+public class CourseController {
+    @Autowired
+    private CourseService courseService;
+    
+    @GetMapping
+    public ResponseEntity<List<Course>> getCourses() {
+        // call service method to fetch courses
+    }
+}
+
+@RestController
+@RequestMapping("/api/enrollment")
+public class EnrollmentController {
+    @Autowired
+    private EnrollmentService enrollmentService;
+    
+    @GetMapping("/{studentId}")
+    public ResponseEntity<List<Enrollment>> getEnrollments(@PathVariable Long studentId) {
+        // call service method to fetch enrollments
+    }
+}
+
+@RestController
+@RequestMapping("/api/department")
+public class DepartmentController {
+    @Autowired
+    private DepartmentService departmentService;
+    
+    @GetMapping
+    public ResponseEntity<List<Department>> getDepartments() {
+        // call service method to fetch departments
+    }
+}
